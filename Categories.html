@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Boy Review — ประเภทเกม</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== Category review cards (ไม่กดได้) ===== */
+    .category-card-static {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      cursor: default;          /* ไม่ให้เปลี่ยน cursor */
+      pointer-events: none;     /* กดไม่ได้เลย */
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    /* emoji กลางการ์ด */
+    .cat-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      opacity: 0.15;
+    }
+
+    /* gradient overlay */
+    .cat-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+    }
+
+    /* เนื้อหาใต้การ์ด */
+    .cat-body {
+      position: relative;
+      z-index: 1;
+      padding: 1rem 1.1rem 1.1rem;
+    }
+
+    .cat-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    /* star row */
+    .cat-stars {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .stars-filled {
+      color: var(--accent-yellow);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+
+    .stars-score {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-yellow);
+    }
+
+    /* mini progress bar */
+    .cat-bar-bg {
+      height: 3px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    .cat-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-purple), var(--accent-purple-light));
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1s cubic-bezier(.25,.8,.25,1);
+    }
+    .cat-bar-fill.animate { transform: scaleX(1); }
+
+    .cat-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cat-count {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .cat-top-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* tag color stripe ที่ด้านบนการ์ด */
+    .cat-stripe {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .stripe-rpg      { background: #7c3aed; }
+    .stripe-action   { background: #ef4444; }
+    .stripe-horror   { background: #ec4899; }
+    .stripe-survival { background: #22c55e; }
+    .stripe-stealth  { background: #64748b; }
+    .stripe-racing   { background: #f97316; }
+    .stripe-scifi    { background: #06b6d4; }
+    .stripe-souls    { background: #eab308; }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <nav class="navbar">
+      <a class="nav-logo" href="index.html">
+        <span class="logo-icon">🎮</span>
+        Game <span>Boy</span> Review
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">หน้าแรก</a></li>
+        <li><a href="categories.html" class="active">ประเภทเกม</a></li>
+        <li><a href="popular.html">ยอดนิยม</a></li>
+      </ul>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <h1>🎯 ประเภทเกมทั้งหมด</h1>
+      <p>คะแนนรีวิวเฉลี่ยของเกมทั้งหมดในแต่ละหมวดหมู่</p>
+    </div>
+
+    <!-- CATEGORY REVIEW CARDS (ดูอย่างเดียว) -->
+    <div class="section">
+      <div class="category-grid">
+
+        <!-- Action -->
+        <div class="category-card-static reveal reveal-delay-1">
+          <div class="cat-stripe stripe-action"></div>
+          <div class="cat-icon">🎯</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-body">
+            <div class="cat-name">Action</div>
+            <div class="cat-stars">
+              <span class="stars-filled">★★★★★</span>
+              <span class="stars-score">8.7 / 10</span>
+            </div>
+            <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:87%"></div></div>
+            <div class="cat-meta">
+              <span class="cat-count">142 เกม · 38,204 รีวิว</span>
+              <span class="cat-top-label">Top: Devil May Cry 5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horror -->
+        <div class="category-card-static reveal reveal-delay-2">
+          <div class="cat-stripe stripe-horror"></div>
+          <div class="cat-icon">💀</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-body">
+            <div class="cat-name">Horror</div>
+            <div class="cat-stars">
+              <span class="stars-filled">★★★★★</span>
+              <span class="stars-score">9.0 / 10</span>
+            </div>
+            <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:90%"></div></div>
+            <div class="cat-meta">
+              <span class="cat-count">89 เกม · 21,560 รีวิว</span>
+              <span class="cat-top-label">Top: Silent Hill 2 Remake</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RPG -->
+        <div class="category-card-static reveal reveal-delay-3">
+          <div class="cat-stripe stripe-rpg"></div>
+          <div class="cat-icon">⚔️</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-body">
+            <div class="cat-name">RPG</div>
+            <div class="cat-stars">
+              <span class="stars-filled">★★★★★</span>
+              <span class="stars-score">9.4 / 10</span>
+            </div>
+            <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:94%"></div></div>
+            <div class="cat-meta">
+              <span class="cat-count">213 เกม · 74,891 รีวิว</span>
+              <span class="cat-top-label">Top: Elden Ring</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Survival -->
+        <div class="category-card-static reveal reveal-delay-4">
+          <div class="cat-stripe stripe-survival"></div>
+          <div class="cat-icon">🌲</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-body">
+            <div class="cat-name">Survival</div>
+            <div class="cat-stars">
+              <span class="stars-filled">★★★★½</span>
+              <span class="stars-score">9.2 / 10</span>
+            </div>
+            <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:92%"></div></div>
+            <div class="cat-meta">
+              <span class="cat-count">76 เกม · 29,340 รีวิว</span>
+              <span class="cat-top-label">Top: The Last of Us Part II</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stealth -->
+        <div class="category-card-static reveal reveal-delay-1">
+          <div class="cat-stripe stripe-stealth"></div>
+          <div class="cat-icon">🕵️</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-body">
+            <div class="cat-name">Stealth</div>
+            <div class="cat-stars">
+              <span class="stars-filled">★★★★½</span>
+              <span class="stars-score">8.8 / 10</span>
+            </div>
+            <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:88%"></div></div>
+            <div class="cat-meta">
+              <span class="cat-count">54 เกม · 15,720 รีวิว</span>
+              <span class="cat-top-label">Top: Hitman: WoA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Racing -->
+        <div class="category-card-static reveal reveal-delay-2">
+          <div class="cat-stripe stripe-racing"></div>
+          <div class="cat-icon">🏎️</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-body">
+            <div class="cat-name">Racing</div>
+            <div class="cat-stars">
+              <span class="stars-filled">★★★★</span>
+              <span class="stars-score">7.9 / 10</span>
+            </div>
+            <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:79%"></div></div>
+            <div class="cat-meta">
+              <span class="cat-count">61 เกม · 12,083 รีวิว</span>
+              <span class="cat-top-label">Top: Forza Horizon 5</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sci-Fi -->
+        <div class="category-card-static reveal reveal-delay-3">
+          <div class="cat-stripe stripe-scifi"></div>
+          <div class="cat-icon">🚀</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-body">
+            <div class="cat-name">Sci-Fi</div>
+            <div class="cat-stars">
+              <span class="stars-filled">★★★★½</span>
+              <span class="stars-score">9.1 / 10</span>
+            </div>
+            <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:91%"></div></div>
+            <div class="cat-meta">
+              <span class="cat-count">98 เกม · 33,617 รีวิว</span>
+              <span class="cat-top-label">Top: Dead Space Remake</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Souls-like -->
+        <div class="category-card-static reveal reveal-delay-4">
+          <div class="cat-stripe stripe-souls"></div>
+          <div class="cat-icon">🔥</div>
+          <div class="cat-overlay"></div>
+          <div class="cat-body">
+            <div class="cat-name">Souls-like</div>
+            <div class="cat-stars">
+              <span class="stars-filled">★★★★★</span>
+              <span class="stars-score">9.3 / 10</span>
+            </div>
+            <div class="cat-bar-bg"><div class="cat-bar-fill" style="width:93%"></div></div>
+            <div class="cat-meta">
+              <span class="cat-count">37 เกม · 18,245 รีวิว</span>
+              <span class="cat-top-label">Top: Dark Souls III</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ALL GAMES -->
+    <hr class="section-divider" />
+    <div class="section">
+      <div class="section-header reveal">
+        <h2 class="section-title"><span class="icon">🎮</span> เกมทั้งหมด</h2>
+      </div>
+
+      <div class="filter-bar reveal reveal-delay-1">
+        <button class="filter-btn active" data-genre="all">ทั้งหมด</button>
+        <button class="filter-btn" data-genre="action">🎯 Action</button>
+        <button class="filter-btn" data-genre="horror">💀 Horror</button>
+        <button class="filter-btn" data-genre="survival">🌲 Survival</button>
+        <button class="filter-btn" data-genre="rpg">⚔️ RPG</button>
+        <button class="filter-btn" data-genre="stealth">🕵️ Stealth</button>
+        <button class="filter-btn" data-genre="racing">🏎️ Racing</button>
+        <button class="filter-btn" data-genre="scifi">🚀 Sci-Fi</button>
+      </div>
+
+      <div class="game-grid">
+        <div class="game-card" data-game-id="elden-ring" data-genre="rpg">
+          <img class="card-img" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/capsule_616x353.jpg?t=1767883716" alt="Elden Ring" />
+          <div class="card-body">
+            <div class="card-meta"><span class="card-tag tag-rpg">Dark Fantasy RPG</span><span class="card-price">฿1,490</span></div>
+            <h3 class="card-title">Elden Ring</h3>
+            <div class="card-rating">★ 9.5/10</div>
+          </div>
+        </div>
+        <div class="game-card" data-game-id="cyberpunk-2077" data-genre="scifi">
+          <img class="card-img" src="https://cdn1.epicgames.com/offer/77f2b98e2cef40c8a7437518bf420e47/EGS_Cyberpunk2077_CDPROJEKTRED_S1_03_2560x1440-359e77d3cd0a40aebf3bbc130d14c5c7" alt="Cyberpunk 2077" />
+          <div class="card-body">
+            <div class="card-meta"><span class="card-tag tag-cyberpunk">Cyberpunk Action</span><span class="card-price">฿1,290</span></div>
+            <h3 class="card-title">Cyberpunk 2077</h3>
+            <div class="card-rating">★ 8.5/10</div>
+          </div>
+        </div>
+        <div class="game-card" data-game-id="silent-hill-2" data-genre="horror">
+          <img class="card-img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2124490/capsule_616x353.jpg?t=1744248682" alt="Silent Hill 2" />
+          <div class="card-body">
+            <div class="card-meta"><span class="card-tag tag-horror">Horror</span><span class="card-price">฿1,590</span></div>
+            <h3 class="card-title">Silent Hill 2 Remake</h3>
+            <div class="card-rating">★ 9.0/10</div>
+          </div>
+        </div>
+        <div class="game-card" data-game-id="dead-space" data-genre="scifi">
+          <img class="card-img" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1693980/capsule_616x353.jpg?t=1777396576" alt="Dead Space" />
+          <div class="card-body">
+            <div class="card-meta"><span class="card-tag tag-scifi">Sci-Fi Horror</span><span class="card-price">฿1,190</span></div>
+            <h3 class="card-title">Dead Space Remake</h3>
+            <div class="card-rating">★ 9.2/10</div>
+          </div>
+        </div>
+        <div class="game-card" data-game-id="dark-souls-3" data-genre="rpg">
+          <img class="card-img" src="https://areajugones.sport.es/wp-content/uploads/2024/11/dark-souls-3.jpg" alt="Dark Souls III" />
+          <div class="card-body">
+            <div class="card-meta"><span class="card-tag tag-souls">Souls-like</span><span class="card-price">฿890</span></div>
+            <h3 class="card-title">Dark Souls III</h3>
+            <div class="card-rating">★ 9.3/10</div>
+          </div>
+        </div>
+        <div class="game-card" data-game-id="hitman" data-genre="stealth">
+          <img class="card-img" src="https://cdn1.epicgames.com/offer/ed55aa5edc5941de92fd7f64de415793/EGS_HITMANWorldofAssassinationDeluxeEdition_IOInteractiveAS_Bundles_S1_2560x1440-eaff0f09fcf41fb9c1092492e20339e7" alt="Hitman" />
+          <div class="card-body">
+            <div class="card-meta"><span class="card-tag tag-stealth">Stealth</span><span class="card-price">฿1,790</span></div>
+            <h3 class="card-title">Hitman: World of Assassination</h3>
+            <div class="card-rating">★ 8.8/10</div>
+          </div>
+        </div>
+        <div class="game-card" data-game-id="last-of-us-2" data-genre="survival">
+          <img class="card-img" src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg?t=1750959180" alt="The Last of Us Part II" />
+          <div class="card-body">
+            <div class="card-meta"><span class="card-tag tag-survival">Survival</span><span class="card-price">฿990</span></div>
+            <h3 class="card-title">The Last of Us Part II</h3>
+            <div class="card-rating">★ 9.4/10</div>
+          </div>
+        </div>
+        <div class="game-card" data-game-id="nfs-unbound" data-genre="racing">
+          <img class="card-img" src="https://cdn1.epicgames.com/offer/9acb0d22292b48acaeb0eb38b391df93/EGS_NeedforSpeedUnbound_CriterionGames_S1_2560x1440-d74bb63a1f07cbb6376d28409ed8cca4" alt="NFS Unbound" />
+          <div class="card-body">
+            <div class="card-meta"><span class="card-tag tag-racing">Racing</span><span class="card-price">฿1,390</span></div>
+            <h3 class="card-title">Need for Speed Unbound</h3>
+            <div class="card-rating">★ 7.8/10</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>Game Boy Review · รวมเกมดีที่สุดสำหรับเกมเมอร์ทุกสไตล์</footer>
+
+  <script src="main.js"></script>
+  <script>
+    /* animate progress bars เมื่อ scroll เห็น */
+    const bars = document.querySelectorAll('.cat-bar-fill');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('animate'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.3 });
+    bars.forEach(b => io.observe(b));
+  </script>
+</body>
+</html>
